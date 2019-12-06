@@ -55,6 +55,11 @@ public class ClientTask implements Runnable {
                         buffer.clear();
                         break;
                     }
+                    else if(readMessage.startsWith("Q:count")) {
+                    	writeResult = clientSocket.write(ByteBuffer.wrap(("count:"+queue.size()).getBytes())); 
+                        writeResult.get();
+                        buffer.clear();
+                    }
                     else if(readMessage.startsWith("M:")) {
                         //Get Message variable
                         String message = readMessage.split(":")[1].trim();
